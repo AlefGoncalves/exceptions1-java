@@ -26,15 +26,12 @@ public class Program {
 			checkin = sdf.parse(JOptionPane.showInputDialog(null, "Check-in date (dd/MM/yyyy): "));
 			checkout = sdf.parse(JOptionPane.showInputDialog(null, "Check-out date (dd/MM/yyyy): "));
 
-			Date now = new Date();
-			if (checkin.before(now) || checkout.before(now)) {
-				JOptionPane.showMessageDialog(null, "Error in reservation!! Invalid Date");
-			} else if (!checkout.after(checkin)) {
-				JOptionPane.showMessageDialog(null, "Error in reservation!!");
+			String error = reservation.updateDates(checkin, checkout);
+			if (error != null) {
+				JOptionPane.showMessageDialog(null, error);
+			} else {
+				JOptionPane.showMessageDialog(null, "Reservation : " + reservation);
 			}
-
-			reservation.updateDates(checkin, checkout);
-			JOptionPane.showMessageDialog(null, "Reservation : " + reservation);
 		}
 	}
 
